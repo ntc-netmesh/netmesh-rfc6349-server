@@ -17,13 +17,20 @@ GLOBAL_LOGGER = getStreamLogger()
         @PARAMS:
             server_ip   : the ipv4 address of the server
                           whose RTT would be measured from
-            o_file      : output file for the RTT value
+            pcap_name   : pcap trace file name where the RTT process
+                            generated traffic would be saved
+            mss         : Maximum segment size
 '''
-def start_baseline_measure(server_ip, o_file):
+def start_baseline_measure(server_ip, pcap_name, mss):
     rtt_process = None
     try:
-        rtt_process = subprocess.Popen(["python3","udp-ping-server.py"],
-                stdout = o_file)
+        subprocess.run(["gcc","-o","reverse_rtt","reverse_servertcp.c"])
+        rtt_process   = subprocess.Popen(["./reverse_rtt", RTT_MEASURE_PORT, mss],
+                stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        shark_process = subprocess.Popen(["tshark",
+                                          # possible interface ?
+                                          "-w", pcap_name,
+                                          "-a", "duration:60"])
         GLOBAL_LOGGER.debug("BASELINE RTT started")
     except:
         GLOBAL_LOGGER.error("FAILED TO START BASELINE RTT")
@@ -32,19 +39,30 @@ def start_baseline_measure(server_ip, o_file):
         except:
             pass
         raise
-    return rtt_process
+    return rtt_process, shark_process
 
 '''
     Parses an output file where the Round Trip Time value is
         outputted by the rtt process
         @PARAMS:
             o_file            : output filename of the RTT value
+            pcap_fname        : output pcap file of the RTT traffic
         @RETURN:
             rtt_results       : Round Trip Time value
 '''
-def end_baseline_measure(o_file):
+def end_baseline_measure(o_file, pcap_fname, client_ip, server_ip, mss):
     rtt_results = None
     try:
+        outfile = open(o_file,"w+")
+        subprocess.run(["python3",
+                        "rtt_analyzer.py",
+                        pcap_fname,
+                        client_ip,
+                        server_ip,
+                        str(int(mss)-12),
+                        o_file,
+                        str(RTT_MEASURE_PORT),
+                        ], stdout = outfile, stderr = outfile )
         rtt_results = server_utils.parse_ping(o_file)
         GLOBAL_LOGGER.debug("rtt done")
     except:
@@ -61,22 +79,36 @@ def end_baseline_measure(o_file):
                 path        :
 '''
 async def measure_rtt(websocket, path):
-    server_ip = await websocket.recv()
+    params = await websocket.recv()
     rtt = None
     fname = "tempfiles/reverse_mode/rtt_temp"
+    pcap_name = "tempfiles/reverse_mode/rtt.pcap"
     rtt_proc = None
+    shark_proc = None
     try:
-        output_file = open(fname,"w+")
-        rtt_proc = start_baseline_measure(server_ip, output_file)
+        server_ip = websocket.local_address[0] 
+        client_ip = websocket.remote_address[0]
+        client_params = json.loads(params)
+        mss = None
+        try:
+            mss = client_params["MSS"]
+        except:
+            pass
+        rtt_proc, shark_proc = start_baseline_measure(server_ip, pcap_name, mss)
         await websocket.send("rtt started")
-        rtt_proc.wait(timeout=60)
-        output_file.close()
-        rtt = end_baseline_measure(fname)
+        shark_proc.wait(timeout=80)
+        try:
+            rtt_proc.kill()
+            shark_proc.kill()
+        except:
+            pass
+        rtt = end_baseline_measure(fname, pcap_name, client_ip, server_ip, mss)
     except:
         print("rtt failed")
         traceback.print_exc()
         try:
             rtt_proc.kill()
+            shark_proc.kill()
         except:
             pass
     try:

@@ -32,11 +32,8 @@ async def local_to_remote_protocol(websocket, path):
         udp_server = None
         iperf_server = None
         try:
-            rtt_compile = subprocess.run(["gcc", "-o","servertcp","servertcp.c"])
-            rtt_server = subprocess.Popen(["./servertcp",str(RTT_MEASURE_PORT)])
             udp_server = subprocess.Popen(["python3", "udp_server.py", str(UDP_SERVER_PORT)])
-            iperf_server = subprocess.Popen(["iperf3", "-s",
-                                             "--port", str(THPT_NORMAL_PORT)])
+            iperf_server = subprocess.Popen(["iperf3", "-s"])
             await websocket.send("servers started")
             await websocket.recv()
         except:
@@ -46,7 +43,6 @@ async def local_to_remote_protocol(websocket, path):
         try:
             iperf_server.kill()
             udp_server.kill()
-            rtt_server.kill()
         except:
             traceback.print_exc()
             pass

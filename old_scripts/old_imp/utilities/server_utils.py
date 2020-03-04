@@ -31,8 +31,10 @@ def parse_ping(std):
     ping = None
     with open(std,"r") as f:
         for line in f:
-            if "avg" in line:
-                ping = line.split(" ")[2]
+            ping = line
+            if "Lost" in ping:
+                return
+            print("ping:" + ping[:-1])
     f.close()
     return ping
 
@@ -76,9 +78,8 @@ def parse_iperf(std, rtt):
 '''
    Parses the throughput metrics out of a throughput process output file
    @PARAMS:
-        std                    :    filename of the output file
+        stdout_data            :    filename of the output file
         mtu                    :    Maximum Transmission Unit value
-        rtt                    :    Baseline Round Trip Time
 
    @RETURN:
         average_throughput     :    average TCP throughput
@@ -89,35 +90,43 @@ def parse_iperf(std, rtt):
                                       actual and ideal
         speedplot_list         :    N/A
 '''
-def parse_shark(std, recv_window, rtt):
-    speed_plot = []
-    ave_tcp = None
-    ave_tt = None
-    ide_tt = None
-    tcp_ttr = None
-    ide_tcp = (recv_window * 8 / (float(rtt)/1000))/(10**6)
-    offset = 0
-    multiplier = 1
+def parse_shark(std, mtu):
+    speedplot_list = []
+    max_throughput = None
+    average_throughput = None
+    actual = None
+    ideal = None
+    ttr = None
     with open(std,"r") as f:
         for line in f:
             temp = line
             if "sender" in temp:
-                entries = re.findall(r'\S+',temp)
-                if "SUM" in temp:
-                    offset = 1
-                try:
-                    ave_tcp = float(entries[6-offset])
-                    # average transfer time
-                    temp2 = re.split("-",entries[2-offset])
-                    ave_tt = float(temp2[1])
-                    if "KBytes" in entries[5-offset]:
-                        multiplier = 1000
+                entries = re.findall(r'\S+', temp)
 
-                    ide_tt = ( float(entries[4-offset]) * 8 * multiplier ) / ( ide_tcp )
-                    tcp_ttr = ide_tt / ave_tt
-                except:
-                    pass
-    return ave_tcp, ide_tcp, ave_tt, ide_tt, tcp_ttr, speed_plot
+                #check if test ran in 5s
+                timecheck = float(re.split("-", entries[2])[1])
+                if timecheck < 5:
+                    print("iPerf TCP incomplete")
+                    return
+                average_throughput = entries[6]
+
+                if mtu:
+                    max_throughput = (float(mtu)-40) * 8 * 81274 / 1000000
+                    temp2 = re.split("-", entries[2])
+                    actual = float(temp2[1])
+                    ideal = float(entries[4]) * 8 / max_throughput
+                    ttr = actual / ideal
+
+            elif "KBytes" in temp:
+                entries = re.findall(r'\S+', temp)
+                if "Kbits" in entries[7]:
+                    temp = float(entries[6])/1000
+                else:
+                    temp = float(entries[6])
+                x_axis = re.split("-", entries[2])
+                x_axis = int(float(x_axis[1]))
+                speedplot_list.append([x_axis, temp])
+    return average_throughput, max_throughput, actual, ideal, ttr, speedplot_list
 
 #def efficiency_analyzer(std):
 #    dump_analysis = []
