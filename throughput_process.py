@@ -69,7 +69,7 @@ def start_throughput_measure(filename, o_file):
             transfer_time_ideal    : calculated ideal transfer time
             tcp_ttr                : ratio between actual and ideal transfer time
 '''
-def end_throughput_measure(o_file, mtu=None):
+def end_throughput_measure(o_file, mtu=None, rtt=None):
     speed_plot = None
     throughput_average = None
     throughput_ideal = None
@@ -79,7 +79,7 @@ def end_throughput_measure(o_file, mtu=None):
     try:
         throughput_average, throughput_ideal, transfer_time_average, \
                 transfer_time_ideal, tcp_ttr, speed_plot = \
-                server_utils.parse_shark(o_file, mtu)
+                server_utils.parse_shark(o_file, mtu, rtt)
         GLOBAL_LOGGER.debug("throughput test done")
     except:
         GLOBAL_LOGGER.error("throughput parsing error")
@@ -126,7 +126,7 @@ async def measure_throughput(websocket, path):
         # throughput process analysis
         throughput_average, throughput_ideal, transfer_time_average, \
                 transfer_time_ideal, tcp_ttr, speed_plot =\
-                end_throughput_measure(fname, mtu)
+                end_throughput_measure(fname, mtu, rtt)
         ret_dict["THPT_AVG"]       = throughput_average
         ret_dict["THPT_IDEAL"]     = throughput_ideal
         ret_dict["TRANSFER_AVG"]   = transfer_time_average

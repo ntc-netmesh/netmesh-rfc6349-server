@@ -171,3 +171,167 @@ Traceback (most recent call last):
   File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 658, in ensure_open
     ) from self.transfer_data_exc
 websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 658, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1000 (OK), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 658, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1000 (OK), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 674, in transfer_data
+    message = yield from self.read_message()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 742, in read_message
+    frame = yield from self.read_data_frame(max_size=self.max_size)
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 815, in read_data_frame
+    frame = yield from self.read_frame(max_size)
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 884, in read_frame
+    extensions=self.extensions,
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/framing.py", line 99, in read
+    data = yield from reader(2)
+  File "/usr/lib/python3.6/asyncio/streams.py", line 672, in readexactly
+    raise IncompleteReadError(incomplete, n)
+asyncio.streams.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 674, in transfer_data
+    message = yield from self.read_message()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 742, in read_message
+    frame = yield from self.read_data_frame(max_size=self.max_size)
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 815, in read_data_frame
+    frame = yield from self.read_frame(max_size)
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 884, in read_frame
+    extensions=self.extensions,
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/framing.py", line 99, in read
+    data = yield from reader(2)
+  File "/usr/lib/python3.6/asyncio/streams.py", line 672, in readexactly
+    raise IncompleteReadError(incomplete, n)
+asyncio.streams.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 674, in transfer_data
+    message = yield from self.read_message()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 742, in read_message
+    frame = yield from self.read_data_frame(max_size=self.max_size)
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 815, in read_data_frame
+    frame = yield from self.read_frame(max_size)
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 884, in read_frame
+    extensions=self.extensions,
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/framing.py", line 99, in read
+    data = yield from reader(2)
+  File "/usr/lib/python3.6/asyncio/streams.py", line 672, in readexactly
+    raise IncompleteReadError(incomplete, n)
+asyncio.streams.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 674, in transfer_data
+    message = yield from self.read_message()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 742, in read_message
+    frame = yield from self.read_data_frame(max_size=self.max_size)
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 815, in read_data_frame
+    frame = yield from self.read_frame(max_size)
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 884, in read_frame
+    extensions=self.extensions,
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/framing.py", line 99, in read
+    data = yield from reader(2)
+  File "/usr/lib/python3.6/asyncio/streams.py", line 672, in readexactly
+    raise IncompleteReadError(incomplete, n)
+asyncio.streams.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 62, in queue_handler
+    await websocket.recv()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 434, in recv
+    yield from self.ensure_open()
+  File "/home/ndsg/.local/lib/python3.6/site-packages/websockets/protocol.py", line 646, in ensure_open
+    ) from self.transfer_data_exc
+websockets.exceptions.ConnectionClosed: WebSocket connection is closed: code = 1006 (connection closed abnormally [internal]), no reason

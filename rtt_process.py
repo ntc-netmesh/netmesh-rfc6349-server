@@ -24,13 +24,14 @@ GLOBAL_LOGGER = getStreamLogger()
 def start_baseline_measure(server_ip, pcap_name, mss):
     rtt_process = None
     try:
+        server_utils.prepare_file(pcap_name)
         subprocess.run(["gcc","-o","reverse_rtt","reverse_servertcp.c"])
-        rtt_process   = subprocess.Popen(["./reverse_rtt", RTT_MEASURE_PORT, mss],
+        rtt_process   = subprocess.Popen(["./reverse_rtt", str(RTT_MEASURE_PORT), str(mss)],
                 stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         shark_process = subprocess.Popen(["tshark",
                                           # possible interface ?
                                           "-w", pcap_name,
-                                          "-a", "duration:60"])
+                                          "-a", "duration:20"])
         GLOBAL_LOGGER.debug("BASELINE RTT started")
     except:
         GLOBAL_LOGGER.error("FAILED TO START BASELINE RTT")
@@ -57,12 +58,12 @@ def end_baseline_measure(o_file, pcap_fname, client_ip, server_ip, mss):
         subprocess.run(["python3",
                         "rtt_analyzer.py",
                         pcap_fname,
-                        client_ip,
                         server_ip,
+                        client_ip,
                         str(int(mss)-12),
                         o_file,
                         str(RTT_MEASURE_PORT),
-                        ], stdout = outfile, stderr = outfile )
+                        ], stdout = subprocess.PIPE, stderr = subprocess.PIPE )
         rtt_results = server_utils.parse_ping(o_file)
         GLOBAL_LOGGER.debug("rtt done")
     except:

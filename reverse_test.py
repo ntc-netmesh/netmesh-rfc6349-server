@@ -48,7 +48,8 @@ def retrieve_reverse_mode_handler(server_url=MAIN_SERVER_IP):
     rtt_handler        = websockets.serve(measure_rtt,        server_url, RTT_HANDLER_PORT     , ping_timeout=600)
     #bandwidth_handler  = websockets.serve(measure_bandwidth,  server_url, BB_HANDLER_PORT      , ping_timeout=600)
     throughput_handler = websockets.serve(measure_throughput, server_url, THPT_HANDLER_PORT    , ping_timeout=600)
-    return [mtu_handler, rtt_handler, bandwidth_handler, throughput_handler]
+    #return [mtu_handler, rtt_handler, bandwidth_handler, throughput_handler]
+    return [mtu_handler, rtt_handler, throughput_handler]
 
 if __name__ == "__main__":
     remote_to_local_protocol()
