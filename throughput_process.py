@@ -134,7 +134,8 @@ async def measure_throughput(websocket, path):
         ret_dict["TCP_TTR"]        = tcp_ttr
         ret_dict["SPEED_PLOT"]     = speed_plot
 
-        server_ip = client_params["SERVER_IP"]
+        #server_ip = client_params["SERVER_IP"]
+        server_ip = websocket.local_address[0]
         # pcap metrics analyzer
         # efficiency
         transmitted_bytes, retransmitted_bytes, tcp_efficiency = \
