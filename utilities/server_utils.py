@@ -114,7 +114,8 @@ def parse_shark(std, recv_window, rtt):
                         multiplier = 1000
 
                     ide_tt = ( float(entries[4-offset]) * 8 * multiplier ) / ( ide_tcp )
-                    tcp_ttr =  ave_tt / ide_tt
+                    #tcp_ttr =  ave_tt / ide_tt
+                    tcp_ttr =  ide_tt / ave_tt
                 except:
                     pass
     return ave_tcp, ide_tcp, ave_tt, ide_tt, tcp_ttr, speed_plot
