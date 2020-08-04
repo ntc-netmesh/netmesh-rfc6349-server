@@ -58,7 +58,7 @@ def get_average_rtt(filename, client_ip, server_ip, baseline_rtt):
     try:
         average_rtt  = sum(rtt)/len(rtt)*1.0
         average_rtt  = average_rtt*multiplier
-        buffer_delay = (average_rtt - float(buffer_delay)) / float(buffer_delay)  
+        buffer_delay = (average_rtt - float(baseline_rtt)) / float(baseline_rtt)  
         #return round(average_rtt*1000,5), buffer_delay
         return average_rtt, buffer_delay
     except:
