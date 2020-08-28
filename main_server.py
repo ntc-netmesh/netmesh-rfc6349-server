@@ -23,8 +23,6 @@ async def queue_consumer(queue):
     while True:
         try:
             current_hash = await queue.get()
-            if not previous_hash:
-                previous_hash = current_hash
             while (previous_hash in CURRENTLY_SERVING):
                 await asyncio.sleep(5)
             CURRENTLY_SERVING[current_hash] = "CURRENT_TURN"
