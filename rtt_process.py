@@ -7,6 +7,7 @@ from log_settings import getStreamLogger
 from datetime import datetime
 from constants import *
 from utilities import server_utils
+import sys
 
 GLOBAL_LOGGER = getStreamLogger()
 
@@ -81,6 +82,7 @@ def end_baseline_measure(o_file, pcap_fname, client_ip, server_ip, mss):
 '''
 async def measure_rtt(websocket, path):
     params = await websocket.recv()
+    print(params)
     rtt = None
     fname = "tempfiles/reverse_mode/rtt_temp"
     pcap_name = "tempfiles/reverse_mode/rtt.pcap"

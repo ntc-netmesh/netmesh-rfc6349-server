@@ -22,11 +22,19 @@ async def queue_consumer(queue):
     previous_hash = None
     while True:
         try:
-            current_hash = await queue.get()
+            current_hash = await queue.get() #FIFO OUT
+            print(previous_hash,"\n")
+            print(CURRENTLY_SERVING,"\n")
             while (previous_hash in CURRENTLY_SERVING):
-                await asyncio.sleep(5)
+                await asyncio.sleep(1)
             CURRENTLY_SERVING[current_hash] = "CURRENT_TURN"
-            previous_hash = current_hash
+            if previous_hash == current_hash:
+                print("DELETED ",current_hash)
+                del CURRENTLY_SERVING[current_hash]
+                previous_hash = None
+                current_hash = None
+            else:
+                previous_hash = current_hash
         except:
             traceback.print_exc()
 
@@ -50,17 +58,26 @@ async def queue_handler(websocket, path):
     queue_log_file = "tempfiles/queue/queue_log"
     try:
         client_hash = await websocket.recv()
-        QUEUE_PLACEMENT.append(client_hash)
-        await MASTER_QUEUE.put(client_hash)
+        if client_hash not in QUEUE_PLACEMENT:
+            print("HASH NOT IN QP")
+            QUEUE_PLACEMENT.append(client_hash)
+            await MASTER_QUEUE.put(client_hash) #FIFO IN
+            await asyncio.sleep(5)
         # await for turn
         while not client_hash in CURRENTLY_SERVING:
-            await websocket.send(get_queue_placement(client_hash))
+            hash_index = get_queue_placement(client_hash)
+            await websocket.send(hash_index)
             #await asyncio.sleep(1)
+
         # signal the client's turn
         await websocket.send(CURRENTLY_SERVING[client_hash])
         # client does the test
         await websocket.recv()
-        del CURRENTLY_SERVING[client_hash]
+        try:
+            del CURRENTLY_SERVING[client_hash]
+            QUEUE_PLACEMENT.remove(client_hash)
+        except:
+            pass
         await websocket.send("serve done")
         #await websocket.send("serve done : "+str(SHARED_RESULTS.pop(hashtxt)))
     except:

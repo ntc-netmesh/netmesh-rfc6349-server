@@ -34,7 +34,7 @@ def remote_to_local_protocol():
     rtt_handler        = websockets.serve(measure_rtt,        MAIN_SERVER_IP, RTT_HANDLER_PORT     , ping_timeout=600)
     #bandwidth_handler  = websockets.serve(measure_bandwidth,  MAIN_SERVER_IP, BB_HANDLER_PORT      , ping_timeout=600)
     throughput_handler = websockets.serve(measure_throughput, MAIN_SERVER_IP, THPT_HANDLER_PORT    , ping_timeout=600)
-    all_grp = asyncio.gather(mtu_handler, rtt_handler, bandwidth_handler, throughput_handler)
+    all_grp = asyncio.gather(mtu_handler, rtt_handler, throughput_handler)
     asyncio.get_event_loop().run_until_complete(all_grp)
     asyncio.get_event_loop().run_forever()
 

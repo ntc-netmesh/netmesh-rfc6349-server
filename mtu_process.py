@@ -19,7 +19,7 @@ from utilities import server_utils
 '''
 def start_mtu_reverse(ofile):
     try:
-        plpmtu_process = subprocess.Popen(["./plpmtu_reverse"],stdout = ofile, stderr = ofile)
+        plpmtu_process = subprocess.Popen(["sudo","./plpmtu_reverse"],stdout = ofile, stderr = ofile)
         print("PLPMTU REVERSE started")
     except:
         print("FAILED TO START PLPMTU REVERSE")
@@ -57,6 +57,7 @@ def end_mtu_reverse(ofile):
 '''
 async def measure_mtu(websocket, path):
     go_signal = await websocket.recv()
+    print(go_signal)
     mtu = None
     filename = "tempfiles/reverse_mode/mtu_reverse_temp"
     mtu_reverse_proc = None

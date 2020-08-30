@@ -6,13 +6,13 @@ Testing MTU size 2112 bytes...packet too big for local interface
 Testing MTU size 1089 bytes...valid
 Testing MTU size 1600 bytes...packet too big for local interface
 Testing MTU size 1344 bytes...valid
-Testing MTU size 1472 bytes...valid
-Testing MTU size 1536 bytes...packet too big for local interface
-Testing MTU size 1504 bytes...packet too big for local interface
-Testing MTU size 1488 bytes...valid
-Testing MTU size 1496 bytes...valid
-Testing MTU size 1500 bytes...valid
-Testing MTU size 1502 bytes...packet too big for local interface
-Testing MTU size 1501 bytes...packet too big for local interface
+Testing MTU size 1472 bytes...packet too big for local interface
+Testing MTU size 1408 bytes...valid
+Testing MTU size 1440 bytes...valid
+Testing MTU size 1456 bytes...valid
+Testing MTU size 1464 bytes...packet too big for local interface
+Testing MTU size 1460 bytes...valid
+Testing MTU size 1462 bytes...packet too big for local interface
+Testing MTU size 1461 bytes...packet too big for local interface
 
-PLPMTUD to 202.92.132.194: 1500 bytes (20 IPv4 header + 8 UDP header + 1472 data).
+PLPMTUD to 111.125.121.208: 1460 bytes (20 IPv4 header + 8 UDP header + 1432 data).
