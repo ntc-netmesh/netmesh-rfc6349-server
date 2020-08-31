@@ -15296,3 +15296,219 @@ Traceback (most recent call last):
   File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
     raise self.connection_closed_exc()
 websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 69, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 71, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 651, in send
+    raise TypeError("data must be bytes, str, or iterable")
+TypeError: data must be bytes, str, or iterable
+Traceback (most recent call last):
+  File "main_server.py", line 71, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 651, in send
+    raise TypeError("data must be bytes, str, or iterable")
+TypeError: data must be bytes, str, or iterable
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 555, in send
+    await self.ensure_open()
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1011 (unexpected error), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 72, in queue_handler
+    await websocket.send(hash_index)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 567, in send
+    await self.write_frame(True, opcode, data)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1083, in write_frame
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 827, in transfer_data
+    message = await self.read_message()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 895, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 971, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1051, in read_frame
+    extensions=self.extensions,
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/framing.py", line 105, in read
+    data = await reader(2)
+  File "/usr/lib/python3.6/asyncio/streams.py", line 672, in readexactly
+    raise IncompleteReadError(incomplete, n)
+asyncio.streams.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 78, in queue_handler
+    await websocket.recv()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 509, in recv
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 827, in transfer_data
+    message = await self.read_message()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 895, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 971, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1051, in read_frame
+    extensions=self.extensions,
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/framing.py", line 105, in read
+    data = await reader(2)
+  File "/usr/lib/python3.6/asyncio/streams.py", line 672, in readexactly
+    raise IncompleteReadError(incomplete, n)
+asyncio.streams.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 81, in queue_handler
+    await websocket.recv()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 509, in recv
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "main_server.py", line 79, in queue_handler
+    await websocket.send(CURRENTLY_SERVING[client_hash])
+KeyError: '14bdcd6fd64180af5e7791df91b6af8e9a3e7bc844997eb8c29252706df97ca5'
+Traceback (most recent call last):
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 827, in transfer_data
+    message = await self.read_message()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 895, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 971, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1051, in read_frame
+    extensions=self.extensions,
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/framing.py", line 105, in read
+    data = await reader(2)
+  File "/usr/lib/python3.6/asyncio/streams.py", line 674, in readexactly
+    yield from self._wait_for_data('readexactly')
+  File "/usr/lib/python3.6/asyncio/streams.py", line 464, in _wait_for_data
+    yield from self._waiter
+  File "/usr/lib/python3.6/asyncio/selector_events.py", line 714, in _read_ready
+    data = self._sock.recv(self.max_size)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 81, in queue_handler
+    await websocket.recv()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 509, in recv
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 827, in transfer_data
+    message = await self.read_message()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 895, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 971, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 1051, in read_frame
+    extensions=self.extensions,
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/framing.py", line 105, in read
+    data = await reader(2)
+  File "/usr/lib/python3.6/asyncio/streams.py", line 672, in readexactly
+    raise IncompleteReadError(incomplete, n)
+asyncio.streams.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 82, in queue_handler
+    await websocket.recv()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 509, in recv
+    await self.ensure_open()
+  File "/home/jeanjayquitayen/.local/lib/python3.6/site-packages/websockets/protocol.py", line 803, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason

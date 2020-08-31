@@ -33,6 +33,7 @@ async def queue_consumer(queue):
                 del CURRENTLY_SERVING[current_hash]
                 previous_hash = None
                 current_hash = None
+
             else:
                 previous_hash = current_hash
         except:
@@ -63,9 +64,15 @@ async def queue_handler(websocket, path):
             QUEUE_PLACEMENT.append(client_hash)
             await MASTER_QUEUE.put(client_hash) #FIFO IN
             await asyncio.sleep(5)
+        else:
+            pass
         # await for turn
         while not client_hash in CURRENTLY_SERVING:
             hash_index = get_queue_placement(client_hash)
+            if hash_index == "0":
+                CURRENTLY_SERVING[client_hash] = "CURRENT_TURN"
+                break
+
             await websocket.send(hash_index)
             #await asyncio.sleep(1)
 
