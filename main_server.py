@@ -79,7 +79,13 @@ async def queue_handler(websocket, path):
         # signal the client's turn
         await websocket.send(CURRENTLY_SERVING[client_hash])
         # client does the test
-        await websocket.recv()
+        while True:
+            try:
+                print("waiting....")
+                await websocket.recv()
+                break
+            except:
+                traceback.print_exc()
         try:
             del CURRENTLY_SERVING[client_hash]
             QUEUE_PLACEMENT.remove(client_hash)
