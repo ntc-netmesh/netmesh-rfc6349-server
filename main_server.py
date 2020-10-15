@@ -22,20 +22,19 @@ async def queue_consumer(queue):
     previous_hash = None
     while True:
         try:
-            current_hash = await queue.get() #FIFO OUT
-            print(previous_hash,"\n")
-            print(CURRENTLY_SERVING,"\n")
-            while (previous_hash in CURRENTLY_SERVING):
-                await asyncio.sleep(1)
-            CURRENTLY_SERVING[current_hash] = "CURRENT_TURN"
-            if previous_hash == current_hash:
-                print("DELETED ",current_hash)
-                del CURRENTLY_SERVING[current_hash]
-                previous_hash = None
-                current_hash = None
+            if len(CURRENTLY_SERVING) == 0:
+                current_hash = await queue.get() #FIFO OUT
+                if current_hash != previous_hash:
+                    previous_hash = current_hash
+                else:
+                    previous_hash = None
 
-            else:
-                previous_hash = current_hash
+                if current_hash in QUEUE_PLACEMENT:
+                    CURRENTLY_SERVING[current_hash] = "CURRENT_TURN"
+                    print("CURRENTLY SERVING ",CURRENTLY_SERVING)
+                    while (current_hash in CURRENTLY_SERVING):
+                        await asyncio.sleep(1)
+
         except:
             traceback.print_exc()
 
@@ -44,10 +43,9 @@ async def queue_consumer(queue):
 '''
 def get_queue_placement(client_hash):
     try:
-        return str(QUEUE_PLACEMENT.index(client_hash))
+        return QUEUE_PLACEMENT.index(client_hash)
     except:
-        return
-
+        return 0
 
 '''
     This server function should be the first contact point of the client
@@ -62,23 +60,21 @@ async def queue_handler(websocket, path):
         if client_hash not in QUEUE_PLACEMENT:
             print("HASH NOT IN QP")
             QUEUE_PLACEMENT.append(client_hash)
+            print("number of clients: ",len(QUEUE_PLACEMENT))
             await MASTER_QUEUE.put(client_hash) #FIFO IN
+            print("HASH IN QUEUE")
             await asyncio.sleep(5)
-        else:
-            pass
+
         # await for turn
         while not client_hash in CURRENTLY_SERVING:
             hash_index = get_queue_placement(client_hash)
-            if hash_index == "0":
-                CURRENTLY_SERVING[client_hash] = "CURRENT_TURN"
-                break
-
-            await websocket.send(hash_index)
+            await websocket.send(str(hash_index))
             #await asyncio.sleep(1)
 
         # signal the client's turn
         await websocket.send(CURRENTLY_SERVING[client_hash])
         # client does the test
+<<<<<<< HEAD
         while True:
             try:
                 print("waiting....")
@@ -91,7 +87,12 @@ async def queue_handler(websocket, path):
             QUEUE_PLACEMENT.remove(client_hash)
         except:
             pass
+=======
+        await websocket.recv()
+>>>>>>> 56876383ac53573e130cac3251fee8f617780cc4
         await websocket.send("serve done")
+        del CURRENTLY_SERVING[client_hash]
+        QUEUE_PLACEMENT.remove(client_hash)
         #await websocket.send("serve done : "+str(SHARED_RESULTS.pop(hashtxt)))
     except:
         try:
