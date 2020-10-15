@@ -75,6 +75,10 @@ async def queue_handler(websocket, path):
         await websocket.send(CURRENTLY_SERVING[client_hash])
         # client does the test
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        # avoid error on timeout
+>>>>>>> working
         while True:
             try:
                 print("waiting....")
