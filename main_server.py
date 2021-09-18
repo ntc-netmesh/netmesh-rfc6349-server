@@ -1,4 +1,5 @@
 import asyncio
+from log_settings import customLogger
 import websockets
 import random
 import json
@@ -12,6 +13,9 @@ QUEUE_PLACEMENT = []
 MASTER_QUEUE = asyncio.Queue()
 CURRENTLY_SERVING = {}
 
+
+logger = customLogger()
+
 '''
     This function is responsible for exhausting the queue
     and notifying the queue_handler via a the shared resource
@@ -23,13 +27,10 @@ async def queue_consumer(queue):
     while True:
         try:
             current_hash = await queue.get() #FIFO OUT
-            print(previous_hash,"\n")
-            print(CURRENTLY_SERVING,"\n")
             while (previous_hash in CURRENTLY_SERVING):
                 await asyncio.sleep(1)
             CURRENTLY_SERVING[current_hash] = "CURRENT_TURN"
             if previous_hash == current_hash:
-                print("DELETED ",current_hash)
                 del CURRENTLY_SERVING[current_hash]
                 previous_hash = None
                 current_hash = None
@@ -59,11 +60,11 @@ async def queue_handler(websocket, path):
     queue_log_file = "tempfiles/queue/queue_log"
     try:
         client_hash = await websocket.recv()
+        logger.info('Received Client Hash: %s', client_hash)
         if client_hash not in QUEUE_PLACEMENT:
-            print("HASH NOT IN QP")
             QUEUE_PLACEMENT.append(client_hash)
             await MASTER_QUEUE.put(client_hash) #FIFO IN
-            await asyncio.sleep(5)
+            await asyncio.sleep(1)
         else:
             pass
         # await for turn
@@ -74,24 +75,26 @@ async def queue_handler(websocket, path):
                 break
 
             await websocket.send(hash_index)
-            #await asyncio.sleep(1)
+            logger.info('Sent hash index: %d', hash_index)
+            await asyncio.sleep(1)
 
         # signal the client's turn
         await websocket.send(CURRENTLY_SERVING[client_hash])
         # client does the test
         while True:
             try:
-                print("waiting....")
                 await websocket.recv()
                 break
             except:
+                raise
                 traceback.print_exc()
         try:
             del CURRENTLY_SERVING[client_hash]
             QUEUE_PLACEMENT.remove(client_hash)
         except:
-            pass
+            raise
         await websocket.send("serve done")
+        logger.info("Sent Message: 'server done'")
         #await websocket.send("serve done : "+str(SHARED_RESULTS.pop(hashtxt)))
     except:
         try:
@@ -100,11 +103,8 @@ async def queue_handler(websocket, path):
             if client_hash in QUEUE_PLACEMENT:
                 QUEUE_PLACEMENT.remove(client_hash)
             #time_str = datetime.today().strftime('%Y-%m-%d-%H-%M-%S : ') 
-            logf = open(queue_log_file,"a+")
-            traceback.print_exc(file=logf)
-            logf.close()
         except:
-            pass
+            raise
         # add to error logs
 
 '''

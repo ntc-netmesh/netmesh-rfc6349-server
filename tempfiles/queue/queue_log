@@ -15957,3 +15957,336 @@ Traceback (most recent call last):
   File "/usr/lib/python3.6/traceback.py", line 105, in print_exception
     print(line, file=file, end="")
 KeyboardInterrupt
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 723, in readexactly
+    await self._wait_for_data('readexactly')
+  File "/usr/lib/python3.8/asyncio/streams.py", line 517, in _wait_for_data
+    await self._waiter
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 85, in queue_handler
+    await websocket.recv()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 421, in recv
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main_server.py", line 88, in queue_handler
+    traceback.print_exc()
+  File "/usr/lib/python3.8/traceback.py", line 163, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.8/traceback.py", line 103, in print_exception
+    for line in TracebackException(
+  File "/usr/lib/python3.8/traceback.py", line 481, in __init__
+    cause = TracebackException(
+  File "/usr/lib/python3.8/traceback.py", line 508, in __init__
+    self.stack = StackSummary.extract(
+  File "/usr/lib/python3.8/traceback.py", line 362, in extract
+    linecache.checkcache(filename)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 723, in readexactly
+    await self._wait_for_data('readexactly')
+  File "/usr/lib/python3.8/asyncio/streams.py", line 517, in _wait_for_data
+    await self._waiter
+  File "/usr/lib/python3.8/asyncio/selector_events.py", line 848, in _read_ready__data_received
+    data = self._sock.recv(self.max_size)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 85, in queue_handler
+    await websocket.recv()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 421, in recv
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main_server.py", line 88, in queue_handler
+    traceback.print_exc()
+  File "/usr/lib/python3.8/traceback.py", line 163, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.8/traceback.py", line 103, in print_exception
+    for line in TracebackException(
+  File "/usr/lib/python3.8/traceback.py", line 481, in __init__
+    cause = TracebackException(
+  File "/usr/lib/python3.8/traceback.py", line 508, in __init__
+    self.stack = StackSummary.extract(
+  File "/usr/lib/python3.8/traceback.py", line 362, in extract
+    linecache.checkcache(filename)
+  File "/usr/lib/python3.8/linecache.py", line 74, in checkcache
+    stat = os.stat(fullname)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 721, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 85, in queue_handler
+    await websocket.recv()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 421, in recv
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main_server.py", line 88, in queue_handler
+    traceback.print_exc()
+  File "/usr/lib/python3.8/traceback.py", line 163, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.8/traceback.py", line 105, in print_exception
+    print(line, file=file, end="")
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 721, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 85, in queue_handler
+    await websocket.recv()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 421, in recv
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main_server.py", line 88, in queue_handler
+    traceback.print_exc()
+  File "/usr/lib/python3.8/traceback.py", line 163, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.8/traceback.py", line 105, in print_exception
+    print(line, file=file, end="")
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 721, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 85, in queue_handler
+    await websocket.recv()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 421, in recv
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main_server.py", line 88, in queue_handler
+    traceback.print_exc()
+  File "/usr/lib/python3.8/traceback.py", line 163, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.8/traceback.py", line 105, in print_exception
+    print(line, file=file, end="")
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 721, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 80, in queue_handler
+    await websocket.send(CURRENTLY_SERVING[client_hash])
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 471, in send
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 721, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 85, in queue_handler
+    await websocket.recv()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 421, in recv
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main_server.py", line 88, in queue_handler
+    traceback.print_exc()
+  File "/usr/lib/python3.8/traceback.py", line 163, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.8/traceback.py", line 105, in print_exception
+    print(line, file=file, end="")
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 721, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 85, in queue_handler
+    await websocket.recv()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 421, in recv
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main_server.py", line 88, in queue_handler
+    traceback.print_exc()
+  File "/usr/lib/python3.8/traceback.py", line 163, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.8/traceback.py", line 105, in print_exception
+    print(line, file=file, end="")
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 750, in transfer_data
+    message = await self.read_message()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 819, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 895, in read_data_frame
+    frame = await self.read_frame(max_size)
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 971, in read_frame
+    frame = await Frame.read(
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/framing.py", line 55, in read
+    data = await reader(2)
+  File "/usr/lib/python3.8/asyncio/streams.py", line 721, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main_server.py", line 85, in queue_handler
+    await websocket.recv()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 421, in recv
+    await self.ensure_open()
+  File "/usr/local/lib/python3.8/dist-packages/websockets/legacy/protocol.py", line 726, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: code = 1006 (connection closed abnormally [internal]), no reason
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main_server.py", line 88, in queue_handler
+    traceback.print_exc()
+  File "/usr/lib/python3.8/traceback.py", line 163, in print_exc
+    print_exception(*sys.exc_info(), limit=limit, file=file, chain=chain)
+  File "/usr/lib/python3.8/traceback.py", line 105, in print_exception
+    print(line, file=file, end="")
+KeyboardInterrupt
