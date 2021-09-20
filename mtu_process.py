@@ -61,7 +61,7 @@ async def measure_mtu(websocket, path):
     go_signal = await websocket.recv()
     logger.info("Received go signal: %s", go_signal)
     mtu = None
-    filename = "tempfiles/reverse_mode/mtu_reverse_temp"
+    filename = "/tmp/reverse_mode_mtu_reverse_temp"
     mtu_reverse_proc = None
     try:
         ofile = open(filename, "w+")

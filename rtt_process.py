@@ -8,6 +8,7 @@ from datetime import datetime
 from constants import *
 from utilities import server_utils
 import sys
+import rtt_analyzer
 
 logger = logging.getLogger(__name__)
 '''
@@ -30,6 +31,7 @@ def start_baseline_measure(server_ip, pcap_name, mss):
                 stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         shark_process = subprocess.Popen(["tshark",
                                           # possible interface ?
+                                          "-i", "eno2",
                                           "-w", pcap_name,
                                           "-a", "duration:20"])
         logger.info("BASELINE RTT started")
@@ -55,21 +57,34 @@ def end_baseline_measure(o_file, pcap_fname, client_ip, server_ip, mss):
     rtt_results = None
     try:
         outfile = open(o_file,"w+")
-        subprocess.run(["python3",
-                        "rtt_analyzer.py",
+        logger.info("running rtt_analyzer.py")
+        minr, maxr, avgr = rtt_analyzer.get_average_rtt(
                         pcap_fname,
-                        server_ip,
                         client_ip,
+                        server_ip,
                         str(int(mss)-12),
-                        o_file,
-                        str(RTT_MEASURE_PORT),
-                        ], stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+                        str(RTT_MEASURE_PORT)
+                )
+        logger.info('Min: %s, Max: %s, Avg: %s', minr, maxr, avgr)
+        #subprocess.run(["python3",
+        #                "rtt_analyzer.py",
+        #                pcap_fname,
+        #                client_ip,
+        #                server_ip,
+        #                str(int(mss)-12),
+        #                o_file,
+        #                str(RTT_MEASURE_PORT),
+        #                ], stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+
         rtt_results = server_utils.parse_ping(o_file)
         logger.info("rtt done")
     except:
-        logger.error.error("rtt parsing error")
+        logger.error("rtt parsing error")
         raise
-    return rtt_results
+    logger.info('rtt_results: %s', rtt_results)
+    if rtt_results:
+        return rtt_results
+    return 1
 
 '''
         Wraps the entire rtt attainment process
@@ -83,8 +98,8 @@ async def measure_rtt(websocket, path):
     params = await websocket.recv()
     logger.info("Received message: %s", params)
     rtt = None
-    fname = "tempfiles/reverse_mode/rtt_temp"
-    pcap_name = "tempfiles/reverse_mode/rtt.pcap"
+    fname = "/tmp/reverse_mode_rtt_temp"
+    pcap_name = "/tmp/reverse_mode_rtt.pcap"
     rtt_proc = None
     shark_proc = None
     try:
@@ -105,6 +120,8 @@ async def measure_rtt(websocket, path):
             shark_proc.kill()
         except:
             pass
+        logger.info('client IP: %s', client_ip)
+        logger.info('server IP: %s', server_ip)
         rtt = end_baseline_measure(fname, pcap_name, client_ip, server_ip, mss)
     except:
         logger.error("rtt failed")
@@ -113,9 +130,11 @@ async def measure_rtt(websocket, path):
             shark_proc.kill()
         except:
             raise
+        raise
     try:
         ret_dict = {"RTT":rtt}
         await websocket.send(json.dumps(ret_dict))
     except:
         await websocket.close()
+        raise
     # done
