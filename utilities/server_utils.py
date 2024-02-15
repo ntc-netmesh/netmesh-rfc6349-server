@@ -1,5 +1,9 @@
 import re, os, subprocess
+import logging
 #from windows_scan import *
+
+
+logger = logging.getLogger(__name__)
 
 '''
    Parses the MTU out of an mtu process output file
@@ -28,9 +32,11 @@ def parse_mtu(std):
         ping            :    baseline round trip time
 '''
 def parse_ping(std):
+    logger.info('Parsing: %s', std)
     ping = None
     with open(std,"r") as f:
         for line in f:
+            print(line)
             if "avg" in line:
                 ping = line.split(" ")[2]
     f.close()
@@ -147,6 +153,7 @@ def parse_shark(std, recv_window, rtt):
 def prepare_file(filename):
     if os.path.exists(filename):
         os.remove(filename)
+    logger.info('FilePath: %s', filename)
     subprocess.call(["sudo", 'touch', filename])
     subprocess.call(["sudo", 'chmod', '666', filename])
     return

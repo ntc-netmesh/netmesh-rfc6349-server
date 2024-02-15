@@ -1,8 +1,11 @@
 from scapy.all import *
+import logging
+import inspect
 import sys
 import time
 
 
+logger = logging.getLogger(__name__)
 '''
 
         Processes and retrieves TCP throughput
@@ -21,7 +24,8 @@ import time
         
 '''
 def get_tcp_metrics(filename, client_ip):
-
+    
+    logger.info("PCAP FILENAME: %s",filename)
     packets               = rdpcap(filename)
     packettotal           = len(packets)
     transmitted_bytes     = 0
@@ -35,7 +39,12 @@ def get_tcp_metrics(filename, client_ip):
                 transmitted_bytes += len(packet)
                 if packet['TCP'].flags & RST:
                     retransmitted_bytes += len(packet)
-    tcp_efficiency = (transmitted_bytes - retransmitted_bytes)/(transmitted_bytes*1.0)
+    try:
+        tcp_efficiency = (transmitted_bytes - retransmitted_bytes)/(transmitted_bytes*1.0)
+    except ZeroDivisionError as e: 
+        logger.exception("From %s: %s",inspect.stack()[3],  e)
+        tcp_efficiency = 0
+
     return transmitted_bytes, retransmitted_bytes, tcp_efficiency
 
 

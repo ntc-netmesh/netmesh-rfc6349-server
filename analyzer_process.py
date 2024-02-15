@@ -5,15 +5,13 @@ import logging
 from scapy.all import *
 from constants import *
 from utilities import server_utils
-from log_settings import getStreamLogger
 from datetime import datetime
 from constants import *
 from tcp_efficiency_analyzer import get_tcp_metrics
 from buffer_delay_analyzer import get_average_rtt
 #from utilities import server_utils
 
-GLOBAL_LOGGER = getStreamLogger()
-
+logger = logging.getLogger(__name__)
 '''
         analyzes the tcp efficiency of a
         completed normal test (no window scan)
@@ -34,11 +32,11 @@ def analyze_efficiency(filename, client_ip):
     retransmitted_bytes = 0
     tcp_efficiency      = 0
     try:
-        GLOBAL_LOGGER.debug("TCP EFFICIENCY ANALYZER started")
+        logger.info("TCP EFFICIENCY ANALYZER started")
         transmitted_bytes, retransmitted_bytes, tcp_efficiency =\
                 get_tcp_metrics(filename, client_ip)
     except:
-        GLOBAL_LOGGER.error("FAILED TO ANALYZE EFFICIENCY")
+        logger.error("FAILED TO ANALYZE EFFICIENCY")
         raise
     return transmitted_bytes, retransmitted_bytes, tcp_efficiency
 
@@ -59,11 +57,11 @@ def analyze_buffer_delay(filename, client_ip, server_ip, rtt):
     average_rtt  = 0
     buffer_delay = 0
     try:
-        GLOBAL_LOGGER.debug("BUFFER DELAY ANALYZER started")
+        logger.info("BUFFER DELAY ANALYZER started")
         average_rtt, buffer_delay =\
                 get_average_rtt(filename, client_ip, server_ip, rtt)
     except:
-        GLOBAL_LOGGER.error("FAILED TO ANALYZE BUFFER DELAY")
+        logger.error("FAILED TO ANALYZE BUFFER DELAY")
         raise
     return average_rtt, buffer_delay
 

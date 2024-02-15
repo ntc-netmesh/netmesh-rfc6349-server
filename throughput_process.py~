@@ -1,16 +1,17 @@
 import subprocess
 import asyncio
-import logging
 import traceback
 import logging
 import json
 import time
+from log_settings import getStreamLogger
 from datetime import datetime
 from constants import *
 from utilities import server_utils
 import analyzer_process
 
-logger = logging.getLogger(__name__)
+GLOBAL_LOGGER = getStreamLogger()
+
 '''
         Starts throughput measuring subproc instances
         one process for packet measuring (shark)
@@ -37,17 +38,17 @@ def start_throughput_measure(filename, o_file):
                                             ], stdout = output_file
                                              , stderr = output_file )
         output_file.close()
-        logger.info("waiting 10 seconds for shark to come online")
+        GLOBAL_LOGGER.debug("waiting 10 seconds for shark to come online")
         time.sleep(10)
-        logger.info("Throughput test started")
+        GLOBAL_LOGGER.debug("Throughput test started")
     except:
-        logger.error("FAILED TO START THROUGHPUT TEST")
+        GLOBAL_LOGGER.error("FAILED TO START THROUGHPUT TEST")
         try:
             shark_proc.kill()
             throughput_proc.kill()
             output_file.close()
         except:
-            raise
+            pass
         raise
     return shark_proc, throughput_proc
 
@@ -79,9 +80,9 @@ def end_throughput_measure(o_file, mtu=None, rtt=None):
         throughput_average, throughput_ideal, transfer_time_average, \
                 transfer_time_ideal, tcp_ttr, speed_plot = \
                 server_utils.parse_shark(o_file, mtu, rtt)
-        logger.info("throughput test done")
+        GLOBAL_LOGGER.debug("throughput test done")
     except:
-        logger.info("throughput parsing error")
+        GLOBAL_LOGGER.error("throughput parsing error")
         raise
     return throughput_average, throughput_ideal, transfer_time_average, \
             transfer_time_ideal, tcp_ttr, speed_plot
@@ -102,14 +103,13 @@ async def measure_throughput(websocket, path):
     shark_proc = None
     # return values
     ret_dict = {}
-    fname = "/tmp/reverse_mode_thpt_temp_file"
+    fname = "tempfiles/reverse_mode/thpt_temp_file"
     try:
-        pcap_name = "/tmp/reverse_mode_thpt_temp.pcap"
+        pcap_name = "tempfiles/reverse_mode/thpt_temp.pcap"
         server_utils.prepare_file(pcap_name)
         #output_file = open(fname,"w+")
         shark_proc, thpt_proc = start_throughput_measure(pcap_name, fname)
         await websocket.send("throughput servers up")
-        logger.info("Sent Message: throughput servers up")
         await websocket.recv()
         thpt_proc.kill()
         shark_proc.kill()
@@ -121,7 +121,7 @@ async def measure_throughput(websocket, path):
             mtu = client_params["MTU"]
             rtt = client_params["RTT"]
         except:
-            raise
+            pass
 
         # throughput process analysis
         throughput_average, throughput_ideal, transfer_time_average, \
@@ -149,25 +149,29 @@ async def measure_throughput(websocket, path):
         average_rtt, buffer_delay =\
                 analyzer_process.analyze_buffer_delay\
                 (pcap_name, server_ip, client_ip, rtt)
-        ret_dict["AVE_RTT"]   = float(average_rtt)
-        ret_dict["BUF_DELAY"] = float(buffer_delay)
-        print(f'THPT TEST RESULT: {ret_dict}')
+        ret_dict["AVE_RTT"]   = average_rtt
+        ret_dict["BUF_DELAY"] = buffer_delay
 
     except:
         try:
             thpt_proc.kill()
             shark_proc.kill()
         except:
-            raise
+            pass
         # MOVE FILES FOR FUTURE DEBUGGING
         debug_file = datetime.today().strftime('tempfiles/reverse_mode/%Y-%m-%d-%H-%M-%S.log')
         server_utils.save_tempfile(fname, debug_file)
         traceback.print_exc()
-        logger.error("throughput test failed")
+        GLOBAL_LOGGER.error("throughput test failed")
     try:
         await websocket.send(json.dumps(ret_dict))
     except:
+        try:
+            output_file = open(fname,"a")
+            traceback.print_exc(file=output_file)
+            output_file.close()
+        except:
+            pass
         await websocket.close()
-        raise
     # done
 

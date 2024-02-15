@@ -1,15 +1,12 @@
 import subprocess
 import asyncio
-import logging
 import traceback
 import json
+from log_settings import getStreamLogger
 from datetime import datetime
 from constants import *
 from utilities import server_utils
 from math import floor, ceil
-
-
-logger = logging.getLogger(__name__)
 
 '''
         Calculates the parameters to be used for the
@@ -73,13 +70,13 @@ async def measure_bandwidth(websocket, path):
             mtu = client_params["MTU"]
             rtt = client_params["RTT"]
         except:
-            raise
+            pass
 
         bb, bdp, mss, rwnd, conn, actual_rwnd =\
                 generate_bb_metrics()
     except:
-        logger.error("bb failed")
-        raise
+        print("bb failed")
+        traceback.print_exc()
 
     try:
         ret_dict = {"BB":bb, "BDP":bdp, "RWND":rwnd}

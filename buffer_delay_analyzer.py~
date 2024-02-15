@@ -1,10 +1,6 @@
 from scapy.all import *
-import logging
 import sys
 import time
-
-
-logger = logging.getLogger(__name__)
 
 '''
     Gets the average rtt of a network trace file
@@ -24,7 +20,7 @@ logger = logging.getLogger(__name__)
         buffer_delay    :   the increase in RTT from the throughput
                             test compared with the computed baseline
 '''
-def get_average_rtt(filename, server_ip, client_ip, baseline_rtt):
+def get_average_rtt(filename, client_ip, server_ip, baseline_rtt):
     packets        = rdpcap(filename)
     packettotal    = len(packets)
     ACK            = 0x10
@@ -33,7 +29,6 @@ def get_average_rtt(filename, server_ip, client_ip, baseline_rtt):
     rtt            = []
     divider_flag   = False
     multiplier     = 1000
-    logger.info("FileName: %s\t Client IP: %s \t Server IP: %s \t BL RTT: %s",filename, client_ip, server_ip, baseline_rtt)
 
     for packet in packets:
         try:
@@ -52,13 +47,13 @@ def get_average_rtt(filename, server_ip, client_ip, baseline_rtt):
                         if (packet[TCP].ack not in server_packets):
                             server_packets[packet[TCP].ack] = packet.time
         except:
-            raise
+            pass
 
     for ack_num, arrival_time in server_packets.items():
         try:
             rtt.append(arrival_time - client_packets[ack_num])
         except:
-            logger.warning("packet number: %s [FAILED]", ack_num)
+            pass
 
     try:
         average_rtt  = sum(rtt)/len(rtt)*1.0
@@ -66,9 +61,8 @@ def get_average_rtt(filename, server_ip, client_ip, baseline_rtt):
         buffer_delay = (average_rtt - float(baseline_rtt)) / float(baseline_rtt)  
         #return round(average_rtt*1000,5), buffer_delay
         return average_rtt, buffer_delay
-    except ZeroDivisionError as e:
-        logger.error("RTT value is 0")
-        return 0,0
+    except:
+        raise
     return
 
 
